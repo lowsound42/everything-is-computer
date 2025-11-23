@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16
+    container_name: mattermost-db
+    restart: unless-stopped
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+
+  app:
+    image: mattermost/mattermost-team-edition:latest
+    container_name: mattermost-app
+    restart: unless-stopped
+    ports:
+      - "8065:8065"
+    volumes:
+      - mattermost-data:/mattermost/data
+    environment:
+      MM_SQLSETTINGS_DRIVERNAME: postgres
+      MM_SQLSETTINGS_DATASOURCE: postgres://mmuser:mattermost1!@db:5432/mattermost?sslmode=disable&connect_timeout=10
+      MM_CONFIG: /mattermost/config/config.json
+      MM_EMAILSETTINGS_ENABLEEMAILNOTIFICATIONS: true
+      MM_EMAILSETTINGS_SENDEMAILNOTIFICATIONS: true
+      MM_EMAILSETTINGS_ENABLESMTPAUTH: true
+      MM_EMAILSETTINGS_SMTPUSERNAME: ${SMTP_USERNAME}
+      MM_EMAILSETTINGS_SMTPPASSWORD: ${SMTP_PASSWORD}
+      MM_EMAILSETTINGS_SMTPSERVER: ${SMTP_SERVER}
+      MM_EMAILSETTINGS_SMTPPORT: ${SMTP_PORT}
+      MM_EMAILSETTINGS_FEEDBACKEMAIL: ${SMTP_FROM}
+      MM_EMAILSETTINGS_CONNECTIONSECURITY: TLS
+      MM_EMAILSETTINGS_REPLYTOADDRESS: noreply@solidarity.gobimax.com
+      MM_EMAILSETTINGS_FEEDBACKNAME: Mattermost
+      MM_PLUGINSETTINGS_ENABLE: true
+      MM_PLUGINSETTINGS_ENABLEUPLOADS: true
+      MM_PLUGINSETTINGS_ALLOWINSECUREDOWNLOADURL: false
+      MM_SERVICESETTINGS_SITEURL: ${MATTERMOST_SITE_URL}
+    depends_on:
+      - db
+
+volumes:
+  db-data:
+  mattermost-data:
