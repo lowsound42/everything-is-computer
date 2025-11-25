@@ -3,7 +3,7 @@ import { Config, PartialDeep } from './lib/types.ts';
 /** Check the Config type for all the possible options and instructions. */
 const config: PartialDeep<Config> = {
   auth: {
-    baseUrl: 'https://drive.gobimax.com', // The base URL of the application you use to access the app, i.e. "http://localhost:8000" or "https://cloud.example.com" (note authentication won't work without https:// except for localhost; SSO redirect, if enabled, will be this + /oidc/callback, so "https://cloud.example.com/oidc/callback")
+    baseUrl: `${domain}`, // The base URL of the application you use to access the app, i.e. "http://localhost:8000" or "https://cloud.example.com" (note authentication won't work without https:// except for localhost; SSO redirect, if enabled, will be this + /oidc/callback, so "https://cloud.example.com/oidc/callback")
     allowSignups: false, // If true, anyone can sign up for an account. Note that it's always possible to sign up for the first user, and they will be an admin
     enableEmailVerification: true, // If true, email verification will be required for signups (using SMTP settings below)
     enableForeverSignup: true, // If true, all signups become active for 100 years
@@ -29,9 +29,9 @@ const config: PartialDeep<Config> = {
   //   helpEmail: '',
   // },
   email: {
-     from: 'noreply@solidarity.gobimax.com',
-     host: 'smtp.resend.com',
-     port: 465,
+     from: `${from}`,
+     host: `${host}`,
+     port: `${port},
    },
   // contacts: {
   //   enableCardDavServer: true,

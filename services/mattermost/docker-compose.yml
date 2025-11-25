@@ -22,7 +22,7 @@ services:
       - mattermost-data:/mattermost/data
     environment:
       MM_SQLSETTINGS_DRIVERNAME: postgres
-      MM_SQLSETTINGS_DATASOURCE: postgres://mmuser:mattermost1!@db:5432/mattermost?sslmode=disable&connect_timeout=10
+      MM_SQLSETTINGS_DATASOURCE: ${CONNECTION_STRING}
       MM_CONFIG: /mattermost/config/config.json
       MM_EMAILSETTINGS_ENABLEEMAILNOTIFICATIONS: true
       MM_EMAILSETTINGS_SENDEMAILNOTIFICATIONS: true
@@ -33,7 +33,7 @@ services:
       MM_EMAILSETTINGS_SMTPPORT: ${SMTP_PORT}
       MM_EMAILSETTINGS_FEEDBACKEMAIL: ${SMTP_FROM}
       MM_EMAILSETTINGS_CONNECTIONSECURITY: TLS
-      MM_EMAILSETTINGS_REPLYTOADDRESS: noreply@solidarity.gobimax.com
+      MM_EMAILSETTINGS_REPLYTOADDRESS: ${REPLY_TO}
       MM_EMAILSETTINGS_FEEDBACKNAME: Mattermost
       MM_PLUGINSETTINGS_ENABLE: true
       MM_PLUGINSETTINGS_ENABLEUPLOADS: true
