@@ -1,6 +1,6 @@
 # README
 
-This repo serves as a reference for the infrastructure being built for the `group that is still unnamed`. I am exploring self-hosted options for basic productivity apps that can be used by a team.
+This repo serves as a reference for the infrastructure being built for `the group that is still unnamed`. I am exploring self-hosted options for basic productivity apps that can be used by a team.
 
 ## Authentication
 
