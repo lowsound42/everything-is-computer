@@ -1,2 +1,3 @@
 # README
-Testing webhook
+
+Removed domain references to make repo public
